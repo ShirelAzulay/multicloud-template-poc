@@ -1,0 +1,15 @@
+
+aws:
+  region: "${AWS_REGION_DEV:-us-west-2}"
+  bucketName: "${AWS_BUCKET_DEV:-dev-bucket}"
+
+gcp:
+  projectId: "${GCP_PROJECT_ID_DEV:-dev-gcp-project}"
+  bucketName: "${GCP_BUCKET_DEV:-dev-bucket}"
+
+azure:
+  region: "${AZURE_REGION_DEV:-eastus}"
+  storageAccount: "${AZURE_STORAGE_ACCOUNT_DEV:-dev-storage-account}"
+  clientId: "${AZURE_CLIENT_ID_DEV:-dev-client-id}"
+  clientSecret: "${AZURE_CLIENT_SECRET_DEV:-dev-client-secret}"
+  tenantId: "${AZURE_TENANT_ID_DEV:-dev-tenant-id}"

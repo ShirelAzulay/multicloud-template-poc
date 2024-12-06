@@ -1,0 +1,12 @@
+
+aws:
+  region: "${AWS_REGION_DEV:-us-east-1}"
+  bucketName: "${AWS_BUCKET_DEV:-default-bucket}"
+
+gcp:
+  projectId: "${GCP_PROJECT_ID_DEV:-default-gcp-project}"
+  bucketName: "${GCP_BUCKET_DEV:-default-gcp-bucket}"
+
+azure:
+  storageAccount: "${AZURE_STORAGE_ACCOUNT_DEV:-default-account}"
+  containerName: "${AZURE_CONTAINER_DEV:-default-container}"

@@ -1,0 +1,10 @@
+
+activeClouds:
+  - aws
+  - gcp
+  - azure
+
+services:
+  storage: true
+  ai: true
+  functions: true

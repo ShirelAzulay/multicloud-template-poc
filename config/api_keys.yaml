@@ -1,0 +1,12 @@
+
+aws:
+  access_key: "${AWS_ACCESS_KEY:-aws-access-key}"
+  secret_key: "${AWS_SECRET_KEY:-aws-secret-key}"
+
+gcp:
+  credentials_path: "${GCP_CREDENTIALS_PATH:-/path/to/credentials.json}"
+
+azure:
+  tenant_id: "${AZURE_TENANT_ID:-azure-tenant-id}"
+  client_id: "${AZURE_CLIENT_ID:-azure-client-id}"
+  client_secret: "${AZURE_CLIENT_SECRET:-azure-client-secret}"

@@ -1,0 +1,15 @@
+
+aws:
+  region: "${AWS_REGION_PROD:-eu-central-1}"
+  bucketName: "${AWS_BUCKET_PROD:-prod-bucket}"
+
+gcp:
+  projectId: "${GCP_PROJECT_ID_PROD:-prod-gcp-project}"
+  bucketName: "${GCP_BUCKET_PROD:-prod-bucket}"
+
+azure:
+  region: "${AZURE_REGION_PROD:-eastus}"
+  storageAccount: "${AZURE_STORAGE_ACCOUNT_PROD:-prod-storage-account}"
+  clientId: "${AZURE_CLIENT_ID_PROD:-prod-client-id}"
+  clientSecret: "${AZURE_CLIENT_SECRET_PROD:-prod-client-secret}"
+  tenantId: "${AZURE_TENANT_ID_PROD:-prod-tenant-id}"
