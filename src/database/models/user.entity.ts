@@ -1,5 +1,5 @@
 
 export class UserEntity {
-    id: number;
-    username: string;
+    id: number = 0;
+    username: string = '';
 }
