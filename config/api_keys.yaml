@@ -1,4 +1,4 @@
-
+// Description: This file contains the API keys for the different cloud providers.
 aws:
   access_key: "${AWS_ACCESS_KEY:-aws-access-key}"
   secret_key: "${AWS_SECRET_KEY:-aws-secret-key}"

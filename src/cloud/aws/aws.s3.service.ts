@@ -4,7 +4,7 @@ import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 @Injectable()
 export class AwsS3Service {
-    private s3Client = new S3Client({ region: process.env.AWS_REGION || 'us-east-1' });
+    private s3Client = new S3Client({ region: process.env.AWS_REGION});
 
     async uploadFile(bucketName: string, key: string, content: Buffer): Promise<void> {
         const command = new PutObjectCommand({

@@ -4,7 +4,7 @@ import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb';
 
 @Injectable()
 export class AwsDynamoDBService {
-    private dynamoDbClient = new DynamoDBClient({ region: process.env.AWS_REGION || 'us-east-1' });
+    private dynamoDbClient = new DynamoDBClient({ region: process.env.AWS_REGION});
 
     async addItem(tableName: string, item: Record<string, any>): Promise<void> {
         const command = new PutItemCommand({
