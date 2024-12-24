@@ -1,1 +1,1 @@
-export class GenaiModule {}
+export class GenAIModule {}

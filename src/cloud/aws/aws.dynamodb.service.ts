@@ -1,20 +1,22 @@
-
 import { Injectable } from '@nestjs/common';
-import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb';
+import { DynamoDB } from 'aws-sdk';
 
 @Injectable()
 export class AwsDynamoDBService {
-    private dynamoDbClient = new DynamoDBClient({ region: process.env.AWS_REGION});
+    private dynamoDB: DynamoDB;
 
-    async addItem(tableName: string, item: Record<string, any>): Promise<void> {
-        const command = new PutItemCommand({
-            TableName: tableName,
-            Item: item,
-        });
-        await this.dynamoDbClient.send(command);
+    constructor() {
+        this.dynamoDB = new DynamoDB();
+    }
+
+    // List DynamoDB tables
+    async listTables(): Promise<string[]> {
+        const result = await this.dynamoDB.listTables().promise();
+        return result.TableNames || [];
+    }
+
+    // Get table information
+    async describeTable(tableName: string): Promise<DynamoDB.DescribeTableOutput> {
+        return this.dynamoDB.describeTable({ TableName: tableName }).promise();
     }
 }
-
-// Usage Example:
-// const dynamoService = new AwsDynamoDBService();
-// dynamoService.addItem('my-table', { id: { S: '123' }, name: { S: 'John Doe' } });

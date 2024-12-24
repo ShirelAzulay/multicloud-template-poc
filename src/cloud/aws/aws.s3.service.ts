@@ -1,21 +1,32 @@
-
 import { Injectable } from '@nestjs/common';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { S3 } from 'aws-sdk';
 
 @Injectable()
 export class AwsS3Service {
-    private s3Client = new S3Client({ region: process.env.AWS_REGION});
+    private s3: S3;
 
-    async uploadFile(bucketName: string, key: string, content: Buffer): Promise<void> {
-        const command = new PutObjectCommand({
-            Bucket: bucketName,
-            Key: key,
-            Body: content,
-        });
-        await this.s3Client.send(command);
+    constructor() {
+        this.s3 = new S3();
+    }
+
+    // List all buckets
+    async listBuckets(): Promise<string[]> {
+        const result = await this.s3.listBuckets().promise();
+        return result.Buckets?.map(bucket => bucket.Name || '') || [];
+    }
+
+    // Upload a file
+    async uploadFile(bucketName: string, key: string, body: Buffer | string): Promise<S3.PutObjectOutput> {
+        return this.s3.putObject({ Bucket: bucketName, Key: key, Body: body }).promise();
+    }
+
+    // Delete a file
+    async deleteFile(bucketName: string, key: string): Promise<S3.DeleteObjectOutput> {
+        return this.s3.deleteObject({ Bucket: bucketName, Key: key }).promise();
+    }
+
+    // Get bucket location
+    async getBucketLocation(bucketName: string): Promise<S3.GetBucketLocationOutput> {
+        return this.s3.getBucketLocation({ Bucket: bucketName }).promise();
     }
 }
-
-// Usage Example:
-// const s3Service = new AwsS3Service();
-// s3Service.uploadFile('my-bucket', 'file.txt', Buffer.from('Hello AWS!'));

@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
-import { GenAIAwsModule } from './users/app.module';
 import * as dotenv from 'dotenv';
+import {GenAIAwsModule} from "./genai/aws/aws.module";
 dotenv.config();// Load environment variables from .env file
 
 

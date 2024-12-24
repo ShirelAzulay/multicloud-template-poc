@@ -1,13 +1,30 @@
-
 import { Injectable } from '@nestjs/common';
-import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda';
+import { Lambda } from 'aws-sdk';
+
 @Injectable()
 export class AwsLambdaService {
-    private lambdaClient = new LambdaClient({ region: process.env.AWS_REGION });
+    private lambda: Lambda;
 
-    async invokeFunction(functionName: string, payload: object): Promise<object> {
-        const command = new InvokeCommand({ FunctionName: functionName, Payload: Buffer.from(JSON.stringify(payload)) });
-        const response = await this.lambdaClient.send(command);
-        return JSON.parse(new TextDecoder('utf-8').decode(response.Payload));
+    constructor() {
+        this.lambda = new Lambda();
+    }
+
+    // List Lambda functions
+    async listFunctions(): Promise<string[]> {
+        const result = await this.lambda.listFunctions().promise();
+        return result.Functions?.map(func => func.FunctionName || '') || [];
+    }
+
+    // Invoke a Lambda function
+    async invokeFunction(functionName: string, payload: Record<string, unknown>): Promise<Lambda.InvocationResponse> {
+        return this.lambda.invoke({
+            FunctionName: functionName,
+            Payload: JSON.stringify(payload),
+        }).promise();
+    }
+
+    // Delete a Lambda function
+    async deleteFunction(functionName: string): Promise<void> {
+        await this.lambda.deleteFunction({ FunctionName: functionName }).promise();
     }
 }
